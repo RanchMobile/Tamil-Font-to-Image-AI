@@ -77,10 +77,10 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
             file_path = os.path.join(image_dir, file_string)
             orgFile = file_path
             image.save(file_path, 'JPEG')
-            labels_csv.write(u'{},{}\n'.format(file_path, mychar))
+            
 
             #directory creation
-            mvDir = os.path.join(image_dir,str(folder_count))
+            mvDir = os.path.join(image_dir, mychar)
             if not os.path.exists(mvDir):
                 os.makedirs(mvDir)
             
@@ -97,11 +97,13 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
                 )
                 distorted_image = Image.fromarray(distorted_array)
                 distorted_image.save(file_path, 'JPEG')
-                labels_csv.write(u'{},{}\n'.format(file_path, mychar))
                 distLoc = os.path.join(mvDir, dist_string)
                 shutil.move(file_path, distLoc)
+                labels_csv.write(u'{},{}\n'.format(mychar, distLoc))
             origLoc = os.path.join(mvDir, file_string)
-            shutil.move(orgFile, os.path.join(mvDir, origLoc))
+            newPath = os.path.join(mvDir, origLoc)
+            shutil.move(orgFile, newPath)
+            labels_csv.write(u'{},{}\n'.format(mychar, newPath))
             
     print('Finished generating {} images.'.format(total_count))
     labels_csv.close()
