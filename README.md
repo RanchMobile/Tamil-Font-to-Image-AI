@@ -7,6 +7,7 @@ Clone this project
 
 ### Step 2
 Go to command prompt **(Start->Run->CMD)**
-Run the following command:
+
+Go to the folder you have cloned and Run the following command:
 
 `python imgen.py`
