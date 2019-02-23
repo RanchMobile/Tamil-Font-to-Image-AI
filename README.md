@@ -8,4 +8,5 @@ Clone this project
 ### Step 2
 Go to command prompt **(Start->Run->CMD)**
 Run the following command:
-'python imgen.py'
+
+`python imgen.py`
