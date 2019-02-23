@@ -10,4 +10,4 @@ Go to command prompt **(Start->Run->CMD)**
 
 Go to the folder you have cloned and Run the following command:
 
-`python imgen.py`
+`py imgen.py`
