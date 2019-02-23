@@ -4,7 +4,7 @@ import glob
 import io
 import os
 import random
-
+import shutil
 import numpy
 from PIL import Image, ImageFont, ImageDraw
 from scipy.ndimage.interpolation import map_coordinates
@@ -51,7 +51,9 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
 
     total_count = 0
     prev_count = 0
+    folder_count = 0
     for character in labels:
+        folder_count += 1
         #print('%s: %d',character,len(character))
         # Print image count roughly every 5000 images.
         if total_count - prev_count > 5000:
@@ -60,25 +62,33 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
         mychar = character
         for font in fonts:
             total_count += 1
-            image = Image.new('L', (IMAGE_WIDTH, IMAGE_HEIGHT), color=0)
+            image = Image.new('L', (IMAGE_WIDTH, IMAGE_HEIGHT), color='white')
             font = ImageFont.truetype(font, int(80/len(mychar)))
             drawing = ImageDraw.Draw(image)
             w, h = drawing.textsize(mychar, font=font)
             drawing.text(
                 ((IMAGE_WIDTH-w)/2, (IMAGE_HEIGHT-h)/2),
                 mychar,
-                fill=(255),
+                fill=(0),
                 font=font
             )
-            file_string = 'tamil_{}.jpeg'.format(total_count)
+            file_string = '{}_{}.jpeg'.format(mychar, total_count)
+            #file_path = os.path.join(image_dir, 'f'+str(folder_count))
             file_path = os.path.join(image_dir, file_string)
+            orgFile = file_path
             image.save(file_path, 'JPEG')
             labels_csv.write(u'{},{}\n'.format(file_path, mychar))
 
+            #directory creation
+            mvDir = os.path.join(image_dir,str(folder_count))
+            if not os.path.exists(mvDir):
+                os.makedirs(mvDir)
+            
             for i in range(DISTORTION_COUNT):
                 total_count += 1
-                file_string = 'tamil_{}.jpeg'.format(total_count)
-                file_path = os.path.join(image_dir, file_string)
+                dist_string = '{}_{}.jpeg'.format(mychar, total_count)
+                #file_path = os.path.join(image_dir, 'f'+str(folder_count))
+                file_path = os.path.join(image_dir, dist_string)
                 arr = numpy.array(image)
 
                 distorted_array = elastic_distort(
@@ -88,7 +98,11 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
                 distorted_image = Image.fromarray(distorted_array)
                 distorted_image.save(file_path, 'JPEG')
                 labels_csv.write(u'{},{}\n'.format(file_path, mychar))
-
+                distLoc = os.path.join(mvDir, dist_string)
+                shutil.move(file_path, distLoc)
+            origLoc = os.path.join(mvDir, file_string)
+            shutil.move(orgFile, os.path.join(mvDir, origLoc))
+            
     print('Finished generating {} images.'.format(total_count))
     labels_csv.close()
 
