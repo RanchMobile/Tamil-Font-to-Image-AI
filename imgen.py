@@ -18,7 +18,7 @@ IMAGE_WIDTH = 160
 IMAGE_HEIGHT = 160
 
 # Number of random distortion images to generate per font and character.
-DISTORTION_COUNT = 3
+DISTORTION_COUNT = 25
 
 # Default data paths.
 DEFAULT_LABEL_FILE = os.path.join(SCRIPT_PATH,
