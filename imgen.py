@@ -72,11 +72,11 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
                 fill=(0),
                 font=font
             )
-            file_string = '{}_{}.jpeg'.format(mychar, total_count)
+            file_string = '{}_{}.jpg'.format(mychar, total_count)
             #file_path = os.path.join(image_dir, 'f'+str(folder_count))
             file_path = os.path.join(image_dir, file_string)
             orgFile = file_path
-            image.save(file_path, 'JPEG')
+            image.save(file_path)
             
 
             #directory creation
@@ -86,7 +86,7 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
             
             for i in range(DISTORTION_COUNT):
                 total_count += 1
-                dist_string = '{}_{}.jpeg'.format(mychar, total_count)
+                dist_string = '{}_{}.jpg'.format(mychar, total_count)
                 #file_path = os.path.join(image_dir, 'f'+str(folder_count))
                 file_path = os.path.join(image_dir, dist_string)
                 arr = numpy.array(image)
@@ -96,7 +96,7 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
                     sigma=random.randint(5, 6)
                 )
                 distorted_image = Image.fromarray(distorted_array)
-                distorted_image.save(file_path, 'JPEG')
+                distorted_image.save(file_path)
                 distLoc = os.path.join(mvDir, dist_string)
                 shutil.move(file_path, distLoc)
                 labels_csv.write(u'{},{}\n'.format(mychar, distLoc))
