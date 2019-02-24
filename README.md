@@ -20,3 +20,6 @@ Clone this project and go to that directory.
 Go to the folder you have cloned and Run the following command in command prompt / terminal:
 
 `python imgen.py`
+
+### Adding More Unicode Fonts
+Simply upload the fonts into the **Fonts/two** directory.
