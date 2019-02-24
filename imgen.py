@@ -80,7 +80,7 @@ def generate_tamil_images(label_file, fonts_dir, output_dir):
             
 
             #directory creation
-            mvDir = os.path.join(image_dir, mychar)
+            mvDir = os.path.join(image_dir, mychar + '_' + str(folder_count))
             if not os.path.exists(mvDir):
                 os.makedirs(mvDir)
             
