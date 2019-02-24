@@ -16,8 +16,7 @@ Install Numpy, Scipy and Pillow modules using the following commands:
 Clone this project and go to that directory.
 
 ### Step 4: Run
-Go to command prompt **(Start->Run->CMD)**
 
-Go to the folder you have cloned and Run the following command:
+Go to the folder you have cloned and Run the following command in command prompt / terminal:
 
 `python imgen.py`
