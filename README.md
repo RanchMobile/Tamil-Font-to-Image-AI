@@ -8,13 +8,9 @@ Please ensure you have Python installed and up to date. Created this project to 
 If you don't have Python then [install Python](https://www.python.org/downloads/) 3.7+ version.
 
 ### Step 2: Install Modules
-Install Numpy and Pillow image library using the following commands:
+Install Numpy, Scipy and Pillow modules using the following commands:
 
-`pip install numpy`
-
-`pip install Pillow`
-
-`pip install Scipy`
+`pip install numpy Pillow Scipy`
 
 ### Step 3: Clone
 Clone this project and go to that directory.
