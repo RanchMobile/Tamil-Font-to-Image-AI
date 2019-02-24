@@ -14,6 +14,8 @@ Install Numpy and Pillow image library using the following commands:
 
 `pip install Pillow`
 
+`pip install Scipy`
+
 ### Step 3: Clone
 Clone this project and go to that directory.
 
